@@ -1,19 +1,28 @@
-package br.com.zup.ZupAgenda.dtos;
+package br.com.zup.ZupAgenda.Contato;
 
-
-import br.com.zup.ZupAgenda.models.Contato;
-
+import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
 
-public class CadastroContatoDTO {
-    @Size(message = "Minimo 2 letras", min = 2)
+@Entity
+@Table(name = "contatos")
+public class Contato {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String nome;
-    @Email(message = "Email fora do padrão")
+    @Column(unique = true, nullable = false)
     private String email;
     private String telefone;
 
-    public CadastroContatoDTO() {
+    public Contato() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -38,14 +47,5 @@ public class CadastroContatoDTO {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public Contato converterDTOemContato(){
-        Contato contato = new Contato();
-        contato.setEmail(email);
-        contato.setNome(nome);
-        contato.setTelefone(telefone);
-
-        return contato;
     }
 }

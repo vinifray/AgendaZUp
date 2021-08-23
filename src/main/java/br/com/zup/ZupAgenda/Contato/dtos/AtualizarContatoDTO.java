@@ -1,20 +1,19 @@
-package br.com.zup.ZupAgenda.models;
+package br.com.zup.ZupAgenda.Contato.dtos;
 
-import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "contatos")
-public class Contato {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AtualizarContatoDTO {
+    @NotNull(message = "Id obrigatorio")
     private int id;
+    @Size(message = "Minimo 2 letras", min = 2)
     private String nome;
-    @Column(unique = true, nullable = false)
+    @Email(message = "Email fora do padrão")
     private String email;
     private String telefone;
 
-    public Contato() {
+    public AtualizarContatoDTO() {
     }
 
     public int getId() {

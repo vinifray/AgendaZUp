@@ -1,36 +1,33 @@
-package br.com.zup.ZupAgenda.services;
+package br.com.zup.ZupAgenda.Contato;
 
-import br.com.zup.ZupAgenda.models.Contato;
-import br.com.zup.ZupAgenda.repositories.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class ContatoService {
+@org.springframework.stereotype.Service
+public class Service {
     @Autowired
-    private ContatoRepository contatoRepository;
+    private Repository repository;
 
     public Contato salvarContato(Contato contato){
-        return contatoRepository.save(contato);
+        return repository.save(contato);
     }
 
     public List<Contato> exibirTodosOsContatos(){
-        return (List<Contato>) contatoRepository.findAll();
+        return (List<Contato>) repository.findAll();
     }
 
     public List<Contato> exibirTodosOsContatos(String letra){
-        return contatoRepository.findByNomeStartsWithIgnoreCase(letra);
+        return repository.findByNomeStartsWithIgnoreCase(letra);
     }
 
     public boolean contatoExistente(int id) {
-        return contatoRepository.existsById(id);
+        return repository.existsById(id);
     }
 
     public Contato buscarContatoPeloId(int id){
-        Optional<Contato> contatoOptional = contatoRepository.findById(id);
+        Optional<Contato> contatoOptional = repository.findById(id);
 
         if(contatoOptional.isPresent()){
             return contatoOptional.get();
@@ -40,7 +37,7 @@ public class ContatoService {
     }
 
     public void deletarPorID(int id){
-        contatoRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
 

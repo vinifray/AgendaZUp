@@ -1,9 +1,7 @@
-package br.com.zup.ZupAgenda.controllers;
+package br.com.zup.ZupAgenda.Contato;
 
-import br.com.zup.ZupAgenda.dtos.AtualizarContatoDTO;
-import br.com.zup.ZupAgenda.dtos.CadastroContatoDTO;
-import br.com.zup.ZupAgenda.models.Contato;
-import br.com.zup.ZupAgenda.services.ContatoService;
+import br.com.zup.ZupAgenda.Contato.dtos.AtualizarContatoDTO;
+import br.com.zup.ZupAgenda.Contato.dtos.CadastroContatoDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,23 +13,23 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contatos")
-public class ContatoController {
+public class Controller {
     @Autowired
-    private ContatoService contatoService;
+    private Service service;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Contato cadastrarContato(@RequestBody @Valid CadastroContatoDTO contato){
         Contato contatoModel = contato.converterDTOemContato();
-        return contatoService.salvarContato(contatoModel);
+        return service.salvarContato(contatoModel);
     }
 
     @GetMapping
     public List<Contato> visualizarContatos(@RequestParam(required = false) String letra){
         if(letra != null){
-            return contatoService.exibirTodosOsContatos(letra);
+            return service.exibirTodosOsContatos(letra);
         }
-        return contatoService.exibirTodosOsContatos();
+        return service.exibirTodosOsContatos();
     }
 
     @GetMapping("/{qualquerCoisa}")
@@ -39,7 +37,7 @@ public class ContatoController {
         Contato contato;
 
         try{
-            contato = contatoService.buscarContatoPeloId(id);
+            contato = service.buscarContatoPeloId(id);
             return contato;
         }catch (RuntimeException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -51,16 +49,16 @@ public class ContatoController {
         ObjectMapper objectMapper = new ObjectMapper();
         Contato objetoConvertido = objectMapper.convertValue(atualizarContatoDTO, Contato.class);
 
-        if(!contatoService.contatoExistente(objetoConvertido.getId())){
+        if(!service.contatoExistente(objetoConvertido.getId())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Contato não encontrado");
         }
-        return contatoService.salvarContato(objetoConvertido);
+        return service.salvarContato(objetoConvertido);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarPeloID(@PathVariable int id){
-        contatoService.deletarPorID(id);
+        service.deletarPorID(id);
     }
 
 }

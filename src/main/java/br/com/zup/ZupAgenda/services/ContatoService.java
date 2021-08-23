@@ -25,7 +25,7 @@ public class ContatoService {
         return contatoRepository.findByNomeStartsWithIgnoreCase(letra);
     }
 
-    public boolean contatoExistente(int id){
+    public boolean contatoExistente(int id) {
         return contatoRepository.existsById(id);
     }
 

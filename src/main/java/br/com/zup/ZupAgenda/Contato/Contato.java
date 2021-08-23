@@ -1,5 +1,7 @@
 package br.com.zup.ZupAgenda.Contato;
 
+import br.com.zup.ZupAgenda.Endereco.Endereco;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
@@ -14,7 +16,18 @@ public class Contato {
     private String email;
     private String telefone;
 
+    @OneToOne
+    private Endereco endereco;
+
     public Contato() {
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public int getId() {

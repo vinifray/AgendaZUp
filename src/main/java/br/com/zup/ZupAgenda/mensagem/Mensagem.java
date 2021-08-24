@@ -1,6 +1,7 @@
 package br.com.zup.ZupAgenda.mensagem;
 
 import br.com.zup.ZupAgenda.contato.Contato;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.LocalDate;

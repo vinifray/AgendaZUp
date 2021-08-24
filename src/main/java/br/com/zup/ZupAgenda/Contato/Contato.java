@@ -1,9 +1,11 @@
 package br.com.zup.ZupAgenda.Contato;
 
 import br.com.zup.ZupAgenda.Endereco.Endereco;
+import br.com.zup.ZupAgenda.mensagem.Mensagem;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.List;
 
 @Entity
 @Table(name = "contatos")
@@ -19,7 +21,18 @@ public class Contato {
     @OneToOne
     private Endereco endereco;
 
+    @OneToMany(mappedBy = "contato")
+    private List<Mensagem> mensagens;
+
     public Contato() {
+    }
+
+    public List<Mensagem> getMensagens() {
+        return mensagens;
+    }
+
+    public void setMensagens(List<Mensagem> mensagens) {
+        this.mensagens = mensagens;
     }
 
     public Endereco getEndereco() {

@@ -41,5 +41,8 @@ public class ContatoService {
         repository.deleteById(id);
     }
 
+    public List<Contato> filtrarPorLogradouro(String logradouro){
+        return repository.findByEnderecoLogradouroContains(logradouro);
+    }
 
 }

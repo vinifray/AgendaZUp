@@ -2,6 +2,7 @@ package br.com.zup.ZupAgenda.Contato;
 
 import br.com.zup.ZupAgenda.Contato.dtos.AtualizarContatoDTO;
 import br.com.zup.ZupAgenda.Contato.dtos.CadastroContatoDTO;
+import br.com.zup.ZupAgenda.Contato.dtos.ContatoResumidoDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,17 @@ public class Controller {
     }
 
     @GetMapping
-    public List<Contato> visualizarContatos(@RequestParam(required = false) String letra){
-        if(letra != null){
-            return service.exibirTodosOsContatos(letra);
+    public List<ContatoResumidoDTO> visualizarContatos(@RequestParam(required = false) String letra, @RequestParam(required = false) String logradouro){
+        if(logradouro != null){
+            List<Contato> contatos = service.filtrarPorLogradouro(logradouro);
+            return ContatoResumidoDTO.converterListaDeModelParaDTO(contatos);
         }
-        return service.exibirTodosOsContatos();
+        if(letra != null){
+            List<Contato> contatos = service.exibirTodosOsContatos(letra);
+            return ContatoResumidoDTO.converterListaDeModelParaDTO(contatos);
+        }
+        List<Contato> contatos = service.exibirTodosOsContatos();
+        return ContatoResumidoDTO.converterListaDeModelParaDTO(contatos);
     }
 
     @GetMapping("/{qualquerCoisa}")

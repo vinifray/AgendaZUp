@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/contatos")
 public class Controller {
     @Autowired
-    private Service service;
+    private ContatoService service;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)

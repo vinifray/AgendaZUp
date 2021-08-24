@@ -1,4 +1,4 @@
-package br.com.zup.ZupAgenda.Contato;
+package br.com.zup.ZupAgenda.contato;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

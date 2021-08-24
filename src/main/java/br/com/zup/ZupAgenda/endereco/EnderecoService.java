@@ -1,7 +1,7 @@
-package br.com.zup.ZupAgenda.Endereco;
+package br.com.zup.ZupAgenda.endereco;
 
-import br.com.zup.ZupAgenda.Contato.Contato;
-import br.com.zup.ZupAgenda.Contato.ContatoService;
+import br.com.zup.ZupAgenda.contato.Contato;
+import br.com.zup.ZupAgenda.contato.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

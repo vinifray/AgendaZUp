@@ -1,6 +1,6 @@
-package br.com.zup.ZupAgenda.Contato.dtos;
+package br.com.zup.ZupAgenda.contato.dtos;
 
-import br.com.zup.ZupAgenda.Contato.Contato;
+import br.com.zup.ZupAgenda.contato.Contato;
 
 import java.util.List;
 import java.util.stream.Collectors;

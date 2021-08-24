@@ -1,27 +1,19 @@
-package br.com.zup.ZupAgenda.Contato.dtos;
+package br.com.zup.ZupAgenda.contato.dtos;
+
+
+import br.com.zup.ZupAgenda.contato.Contato;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AtualizarContatoDTO {
-    @NotNull(message = "Id obrigatorio")
-    private int id;
+public class CadastroContatoDTO {
     @Size(message = "Minimo 2 letras", min = 2)
     private String nome;
     @Email(message = "Email fora do padrão")
     private String email;
     private String telefone;
 
-    public AtualizarContatoDTO() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public CadastroContatoDTO() {
     }
 
     public String getNome() {
@@ -46,5 +38,14 @@ public class AtualizarContatoDTO {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Contato converterDTOemContato(){
+        Contato contato = new Contato();
+        contato.setEmail(email);
+        contato.setNome(nome);
+        contato.setTelefone(telefone);
+
+        return contato;
     }
 }

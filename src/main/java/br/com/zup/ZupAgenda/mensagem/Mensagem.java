@@ -1,6 +1,6 @@
 package br.com.zup.ZupAgenda.mensagem;
 
-import br.com.zup.ZupAgenda.Contato.Contato;
+import br.com.zup.ZupAgenda.contato.Contato;
 
 import javax.persistence.*;
 import java.time.LocalDate;

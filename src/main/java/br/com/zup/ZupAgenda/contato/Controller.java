@@ -1,8 +1,8 @@
-package br.com.zup.ZupAgenda.Contato;
+package br.com.zup.ZupAgenda.contato;
 
-import br.com.zup.ZupAgenda.Contato.dtos.AtualizarContatoDTO;
-import br.com.zup.ZupAgenda.Contato.dtos.CadastroContatoDTO;
-import br.com.zup.ZupAgenda.Contato.dtos.ContatoResumidoDTO;
+import br.com.zup.ZupAgenda.contato.dtos.AtualizarContatoDTO;
+import br.com.zup.ZupAgenda.contato.dtos.CadastroContatoDTO;
+import br.com.zup.ZupAgenda.contato.dtos.ContatoResumidoDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

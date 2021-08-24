@@ -1,10 +1,9 @@
-package br.com.zup.ZupAgenda.Contato;
+package br.com.zup.ZupAgenda.contato;
 
-import br.com.zup.ZupAgenda.Endereco.Endereco;
+import br.com.zup.ZupAgenda.endereco.Endereco;
 import br.com.zup.ZupAgenda.mensagem.Mensagem;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.List;
 
 @Entity

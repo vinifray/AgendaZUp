@@ -1,7 +1,5 @@
-package br.com.zup.ZupAgenda.Contato;
+package br.com.zup.ZupAgenda.contato;
 
-import br.com.zup.ZupAgenda.Contato.Contato;
-import br.com.zup.ZupAgenda.Endereco.Endereco;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

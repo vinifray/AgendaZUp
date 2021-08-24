@@ -1,4 +1,4 @@
-package br.com.zup.ZupAgenda.Endereco;
+package br.com.zup.ZupAgenda.endereco;
 
 import javax.persistence.*;
 

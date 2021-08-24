@@ -1,5 +1,6 @@
 package br.com.zup.ZupAgenda.Endereco;
 
+import br.com.zup.ZupAgenda.Contato.Contato;
 import br.com.zup.ZupAgenda.Contato.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,4 +17,17 @@ public class EnderecoService {
     }
 
 
+    public Endereco cadastrarEndereço(int id, Endereco endereco){
+        if (contatoService.contatoExistente(id)){
+            Contato contatoObjeto = contatoService.buscarContatoPeloId(id);
+
+            enderecoRepository.save(endereco);
+            contatoObjeto.setEndereco(endereco);
+
+            contatoService.salvarContato(contatoObjeto);
+            return endereco;
+        }
+
+        throw new RuntimeException("Contato não encontrado");
+    }
 }

@@ -20,6 +20,8 @@ import java.util.stream.Collectors;
 public class MensagemController {
     @Autowired
     private MensagemService mensagemService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping("/{contatoId}")
     @ResponseStatus(HttpStatus.CREATED)
@@ -33,16 +35,13 @@ public class MensagemController {
     public ResumoMensagemDTO visualizarMensagem(@PathVariable(name = "mensagemId") int id){
         //ModelMapper é uma classe responsavel por converter Models(Entity) em DTO e DTO em Model(entity)
         //ModelMapper só é acessivel caso a dependencia esteja no POM.XML.
-        ModelMapper modelMapper = new ModelMapper();
         Mensagem mensagem = mensagemService.visualizarMensagemPorId(id);
-
         return modelMapper.map(mensagem, ResumoMensagemDTO.class);
     }
 
     @GetMapping
     public List<MensagemIdDTO> pesquisarMensagens(@RequestParam(required = false) String nomeContato,
                                              @RequestParam(required = false) Boolean visualizado){
-        ModelMapper modelMapper = new ModelMapper();
         List<Mensagem> mensagens = mensagemService.filtrarMengensPor(nomeContato, visualizado);
         List<MensagemIdDTO> mensagemIdDTOS = mensagens.
                 stream()

@@ -4,6 +4,7 @@ import br.com.zup.ZupAgenda.contato.dtos.AtualizarContatoDTO;
 import br.com.zup.ZupAgenda.contato.dtos.CadastroContatoDTO;
 import br.com.zup.ZupAgenda.contato.dtos.ContatoResumidoDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

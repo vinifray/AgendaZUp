@@ -9,6 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class ContatoServiceTest {
@@ -47,4 +48,22 @@ public class ContatoServiceTest {
         Assertions.assertEquals(contatoList, contatoService.exibirTodosOsContatos("qualquercoisa"));
     }
 
+    @Test
+    public void testarMetodoBuscarContatoPorIDCaminhoPositivo(){
+        Contato contato = new Contato();
+        Optional<Contato> contatoOptional = Optional.of(contato);
+        Mockito.when(contatoRepository.findById(Mockito.anyInt())).thenReturn(contatoOptional);
+
+        Assertions.assertEquals(contato, contatoService.buscarContatoPeloId(12));
+    }
+
+    @Test
+    public void testarMetodoBuscarContatoPorIDCaminhoNegativo(){
+        Optional<Contato> contatoOptional = Optional.empty();
+        Mockito.when(contatoRepository.findById(Mockito.anyInt())).thenReturn(contatoOptional);
+
+        RuntimeException exception = Assertions
+                .assertThrows(RuntimeException.class, () -> {contatoService.buscarContatoPeloId(21);});
+        Assertions.assertTrue(exception.getMessage().equals("Contato não encontrado"));
+    }
 }

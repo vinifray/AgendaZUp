@@ -10,7 +10,7 @@ public class EnderecoController {
     private EnderecoService enderecoService;
 
     @PutMapping("/{idContato}")
-    public Endereco cadastrarEndereco(@RequestBody Endereco endereco, @PathVariable int idContato){
+    public Endereco cadastrarEndereco(@RequestBody Endereco endereco, @PathVariable int idContato) {
         return enderecoService.cadastrarEndereço(idContato, endereco);
     }
 }

@@ -9,26 +9,26 @@ import java.util.Optional;
 @Service
 public class ContatoService {
     @Autowired
-    private Repository repository;
+    private ContatoRepository contatoRepository;
 
     public Contato salvarContato(Contato contato){
-        return repository.save(contato);
+        return contatoRepository.save(contato);
     }
 
     public List<Contato> exibirTodosOsContatos(){
-        return (List<Contato>) repository.findAll();
+        return (List<Contato>) contatoRepository.findAll();
     }
 
     public List<Contato> exibirTodosOsContatos(String letra){
-        return repository.findByNomeStartsWithIgnoreCase(letra);
+        return contatoRepository.findByNomeStartsWithIgnoreCase(letra);
     }
 
     public boolean contatoExistente(int id) {
-        return repository.existsById(id);
+        return contatoRepository.existsById(id);
     }
 
     public Contato buscarContatoPeloId(int id){
-        Optional<Contato> contatoOptional = repository.findById(id);
+        Optional<Contato> contatoOptional = contatoRepository.findById(id);
 
         if(contatoOptional.isPresent()){
             return contatoOptional.get();
@@ -38,11 +38,11 @@ public class ContatoService {
     }
 
     public void deletarPorID(int id){
-        repository.deleteById(id);
+        contatoRepository.deleteById(id);
     }
 
     public List<Contato> filtrarPorLogradouro(String logradouro){
-        return repository.findByEnderecoLogradouroContains(logradouro);
+        return contatoRepository.findByEnderecoLogradouroContains(logradouro);
     }
 
 }

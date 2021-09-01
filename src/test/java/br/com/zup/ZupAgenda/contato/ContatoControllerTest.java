@@ -84,4 +84,14 @@ public class ContatoControllerTest {
         Contato contato = objectMapper.readValue(jsonDeResposta, Contato.class);
 
     }
+
+    @Test
+    public void testarBucaDeContatoPeloIdNaoExiste() throws Exception {
+        Mockito.when(contatoService.buscarContatoPeloId(Mockito.anyInt()))
+                .thenThrow(RuntimeException.class);
+
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/contatos/42")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 }

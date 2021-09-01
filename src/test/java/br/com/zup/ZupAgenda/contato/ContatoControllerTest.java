@@ -4,6 +4,7 @@ import br.com.zup.ZupAgenda.contato.dtos.CadastroContatoDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -52,6 +53,9 @@ public class ContatoControllerTest {
                         .content(json)).andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email",
                         CoreMatchers.equalTo(contatoDTO.getEmail())));
+
+        String jsonResposta = resultadoDaRequisicao.andReturn().getResponse().getContentAsString();
+        Contato contato = objectMapper.readValue(jsonResposta, Contato.class);
     }
 
     @Test
@@ -66,5 +70,18 @@ public class ContatoControllerTest {
                 .perform(MockMvcRequestBuilders.post("/contatos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)).andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void testarBuscaDeContatoPorId() throws Exception{
+        Mockito.when(contatoService.buscarContatoPeloId(Mockito.anyInt()))
+                .thenReturn(contatoDTO.converterDTOemContato());
+
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/contatos/42")
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
+
+        String jsonDeResposta = resultActions.andReturn().getResponse().getContentAsString();
+        Contato contato = objectMapper.readValue(jsonDeResposta, Contato.class);
+
     }
 }

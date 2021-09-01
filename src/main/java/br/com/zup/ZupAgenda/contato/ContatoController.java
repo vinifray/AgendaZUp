@@ -20,7 +20,7 @@ public class ContatoController {
     private ContatoService service;
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public Contato cadastrarContato(@RequestBody @Valid CadastroContatoDTO contato){
         Contato contatoModel = contato.converterDTOemContato();
         return service.salvarContato(contatoModel);

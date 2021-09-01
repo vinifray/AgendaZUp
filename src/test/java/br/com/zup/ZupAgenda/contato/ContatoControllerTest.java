@@ -54,5 +54,17 @@ public class ContatoControllerTest {
                         CoreMatchers.equalTo(contatoDTO.getEmail())));
     }
 
+    @Test
+    public void testarValidacaoDeCadastroContato() throws Exception {
+        Mockito.when(contatoService.salvarContato(Mockito.any(Contato.class)))
+                .thenReturn(contatoDTO.converterDTOemContato());
+        contatoDTO.setEmail("asuihdia");
+        contatoDTO.setNome("A");
+        String json = objectMapper.writeValueAsString(contatoDTO);
 
+        ResultActions resultadoDaRequisicao = mockMvc
+                .perform(MockMvcRequestBuilders.post("/contatos")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)).andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 }
